@@ -19,25 +19,25 @@ export class CampusAmbassadorController {
     return this.campusAmbassadors;
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string): CampusAmbassador {
-    return this.campusAmbassadors.find((ca) => ca.id === id);
+  @Get(':ID')
+  findOne(@Param('ID') ID: string): CampusAmbassador {
+    return this.campusAmbassadors.find((ca) => ca.ID === ID);
   }
 
   @Post()
   create(@Body() campusAmbassador: CampusAmbassador): CampusAmbassador {
-    // Generate a unique ID for the new campus ambassador (e.g., from a database)
-    campusAmbassador.id = uuid();
+    campusAmbassador.ID = uuid();
+    campusAmbassador.entityType = 'campusAmbassador';
     this.campusAmbassadors.push(campusAmbassador);
     return campusAmbassador;
   }
 
-  @Put(':id')
+  @Put(':ID')
   update(
-    @Param('id') id: string,
+    @Param('ID') ID: string,
     @Body() campusAmbassador: CampusAmbassador,
   ): CampusAmbassador {
-    const index = this.campusAmbassadors.findIndex((ca) => ca.id === id);
+    const index = this.campusAmbassadors.findIndex((ca) => ca.ID === ID);
     if (index !== -1) {
       this.campusAmbassadors[index] = {
         ...this.campusAmbassadors[index],
@@ -48,9 +48,9 @@ export class CampusAmbassadorController {
     return null;
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): void {
-    const index = this.campusAmbassadors.findIndex((ca) => ca.id === id);
+  @Delete(':ID')
+  remove(@Param('ID') ID: string): void {
+    const index = this.campusAmbassadors.findIndex((ca) => ca.ID === ID);
     if (index !== -1) {
       this.campusAmbassadors.splice(index, 1);
     }
