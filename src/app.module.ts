@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CampusAmbassadorModule } from './campus-ambassador/campus-ambassador.module';
+import { CampusAmbassadorModule } from './campus-ambassador/ca.module';
 
 @Module({
   imports: [CampusAmbassadorModule],
