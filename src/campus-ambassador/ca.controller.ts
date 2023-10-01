@@ -26,6 +26,16 @@ export class CampusAmbassadorController {
     return this.campusAmbassadorService.findOne(id);
   }
 
+  @Post('exists')
+  async checkUserExists(
+    @Body() requestBody: { emailID: string },
+  ): Promise<CampusAmbassador | null> {
+    const { emailID } = requestBody;
+
+    const user = await this.campusAmbassadorService.findByEmail(emailID);
+    return user;
+  }
+
   @Post()
   async create(
     @Body() campusAmbassador: CampusAmbassador,

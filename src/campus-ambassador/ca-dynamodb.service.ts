@@ -40,6 +40,32 @@ export class CampusAmbassadorDynamoDBService {
     }
   }
 
+  async findByEmail(emailID: string): Promise<CampusAmbassador | null> {
+    const params = {
+      TableName: this.tableName,
+      FilterExpression: '#emailID = :emailID',
+      ExpressionAttributeNames: {
+        '#emailID': 'emailID',
+      },
+      ExpressionAttributeValues: {
+        ':emailID': emailID,
+      },
+    };
+
+    try {
+      const result = await this.dynamoDB.scan(params).promise();
+
+      if (result.Items && result.Items.length > 0) {
+        return result.Items[0] as CampusAmbassador;
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error in findByEmail: ', error);
+      throw error;
+    }
+  }
+
   async create(campusAmbassador: CampusAmbassador): Promise<CampusAmbassador> {
     const params = {
       TableName: this.tableName,

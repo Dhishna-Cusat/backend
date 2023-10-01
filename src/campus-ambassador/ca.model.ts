@@ -9,4 +9,5 @@ export class CampusAmbassador {
   collegeName: string;
   academicYear: string;
   collegeIDLink: string;
+  registrationTimestamp: string;
 }
